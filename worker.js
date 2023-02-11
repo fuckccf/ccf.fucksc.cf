@@ -41,7 +41,7 @@ var kwd = {
 
 Object.keys(kwd).forEach(k => {
     document.querySelectorAll("div,p,a,h1,h2,h3,h4,h5,h6,span")?.forEach((el) => {
-        if (el.innerHTML.includes(k))
+        if (el.innerHTML.includes(k) && !el.innerHTML.includes("版权"))
             el.innerHTML = el.innerHTML.replaceAll(k,kwd[k])
     })
     document.title = document.title.replaceAll(k,kwd[k])
@@ -89,13 +89,12 @@ document.body.insertAdjacentHTML("beforeend", \`
                         "upgrade-insecure-requests; script-src https://ccf.fucksc.cf/fuck.js https://ccf.fucksc.cf/cdn-cgi/scripts/*"
                     )
                     .replaceAll(
-                        "版权所有 中国收钱协会",
-                        "版权所有 <del>中国收钱协会</del> 中国计算机学会"
-                    )
-                    .replaceAll(
-                        /11010802032778号|13000930号-4/s,
+                        "11010802032778号",
                         " 备你妈的案"
-                    ) + '<script src="https://ccf.fucksc.cf/fuck.js"></script>';
+                    ).replaceAll(
+                        "13000930号-4",
+                        " 备你妈的案"
+                    )  + '<script src="https://ccf.fucksc.cf/fuck.js"></script>';
             return new Response(html, { headers });
         } else {
             return new Response(await res.arrayBuffer(), { headers });
