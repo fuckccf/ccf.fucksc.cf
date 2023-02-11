@@ -1,5 +1,6 @@
 export default {
     async fetch(request, env) {
+        const HOST = new URL(request.url).hostname
         if (request.url.endsWith("fuck.js"))
             return new Response(
                 `
@@ -86,7 +87,7 @@ document.body.insertAdjacentHTML("beforeend", \`
                 html
                     .replaceAll(
                         "upgrade-insecure-requests",
-                        "upgrade-insecure-requests; script-src https://ccf.fucksc.cf/fuck.js https://ccf.fucksc.cf/cdn-cgi/scripts/*"
+                        "upgrade-insecure-requests; script-src https://" + HOST + "/fuck.js"
                     )
                     .replaceAll(
                         "11010802032778号",
@@ -94,7 +95,7 @@ document.body.insertAdjacentHTML("beforeend", \`
                     ).replaceAll(
                         "13000930号-4",
                         " 备你妈的案"
-                    )  + '<script src="https://ccf.fucksc.cf/fuck.js"></script>';
+                    )  + '<script src=" https://' + HOST + '/fuck.js"></script>';
             return new Response(html, { headers });
         } else {
             return new Response(await res.arrayBuffer(), { headers });
