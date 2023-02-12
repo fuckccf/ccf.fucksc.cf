@@ -1,6 +1,6 @@
 export default {
     async fetch(request, env) {
-        const HOST = new URL(request.url).hostname
+        const HOST = new URL(request.url).hostname;
         if (request.url.endsWith("fuck.js"))
             return new Response(
                 `
@@ -72,7 +72,7 @@ document.body.insertAdjacentHTML("beforeend", \`
 })();
 `,
                 {
-                    headers: { "content-type": "text/javascript" },
+                    headers: { "content-type": "text/javascript;charset=utf8" },
                 }
             );
         let res = await fetch(
@@ -87,15 +87,16 @@ document.body.insertAdjacentHTML("beforeend", \`
                 html
                     .replaceAll(
                         "upgrade-insecure-requests",
-                        "upgrade-insecure-requests; script-src https://" + HOST + "/fuck.js"
+                        "upgrade-insecure-requests; script-src https://" +
+                            HOST +
+                            "/fuck.js"
                     )
-                    .replaceAll(
-                        "11010802032778号",
-                        " 备你妈的案"
-                    ).replaceAll(
-                        "13000930号-4",
-                        " 备你妈的案"
-                    )  + '<script src=" https://' + HOST + '/fuck.js"></script>';
+                    .replaceAll("11010802032778号", " 备你妈的案")
+                    .replaceAll("13000930号-4", " 备你妈的案") +
+                '<script src="https://' +
+                HOST +
+                '/fuck.js"></script>' +
+                "本站为 ccf.org.cn 的非官方镜像站\r\n";
             return new Response(html, { headers });
         } else {
             return new Response(await res.arrayBuffer(), { headers });
